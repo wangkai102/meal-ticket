@@ -10,3 +10,9 @@ insert_final_newline = true
 
 [*.md]
 trim_trailing_whitespace = false
+
+[*.js]                              # 对所有的 js 文件生效
+quote_type = single                 # 字符串使用单引号
+
+[*.jsx]                              # 对所有的 jsx 文件生效
+quote_type = single                 # 字符串使用单引号
