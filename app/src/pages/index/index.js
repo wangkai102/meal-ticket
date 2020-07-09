@@ -1,14 +1,24 @@
-import React, { useEffect } from 'react';
-import { View, Button, Text } from '@tarojs/components';
+import React, { useState, useEffect } from 'react';
+import { View, Button } from '@tarojs/components';
+import {
+  AtModal,
+  AtModalHeader,
+  AtModalContent,
+  AtModalAction,
+  AtInput,
+} from 'taro-ui';
 import { useSelector, useDispatch } from 'react-redux';
 
 import * as asyncActions from '../../actions/home';
 import styles from './index.module.less';
 
+import Menu from '../../components/Menu/index';
+
 const Index = ({}) => {
+  const [empId, setEmpId] = useState('');
   const home = useSelector((state) => state.home);
   const dispatch = useDispatch();
-  const { num } = home;
+  const { noBinding } = home;
 
   useEffect(() => {
     asyncActions.login(dispatch);
@@ -16,48 +26,25 @@ const Index = ({}) => {
 
   return (
     <View className={styles.index}>
-      <Button
-        className={styles.addBtn}
-        onClick={() =>
-          dispatch({
-            type: 'save',
-            payload: {
-              num: num + 1,
-            },
-          })
-        }
-      >
-        +
-      </Button>
-      <Button
-        className={styles.decBtn}
-        onClick={() =>
-          dispatch({
-            type: 'save',
-            payload: {
-              num: num - 1,
-            },
-          })
-        }
-      >
-        -
-      </Button>
-      <Button
-        className={styles.decBtn}
-        onClick={() => {
-          const payload = { num: num + 1 };
-          const { asyncAddBtn } = asyncActions;
-          asyncAddBtn(dispatch, payload);
-        }}
-      >
-        async
-      </Button>
-      <View>
-        <Text>{num}</Text>
-      </View>
-      <View>
-        <Text>Hello, World</Text>
-      </View>
+      <AtModal isOpened={noBinding} closeOnClickOverlay={false}>
+        <AtModalHeader>工号绑定</AtModalHeader>
+        <AtModalContent>
+          <View>
+            <AtInput
+              type='text'
+              placeholder='请输入您的员工号码以绑定信息'
+              value={empId}
+              onChange={(v) => {
+                setEmpId(v);
+              }}
+            />
+          </View>
+        </AtModalContent>
+        <AtModalAction>
+          <Button>确定</Button>
+        </AtModalAction>
+      </AtModal>
+      <Menu current={0} />
     </View>
   );
 };

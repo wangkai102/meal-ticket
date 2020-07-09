@@ -2,7 +2,7 @@
   "miniprogramRoot": "./dist",
   "projectname": "app",
   "description": "meal-ticket",
-  "appid": "touristappid",
+  "appid": "wx068a1aabd1d8e02c",
   "setting": {
     "urlCheck": true,
     "es6": false,
