@@ -12,7 +12,7 @@ class EmployeeService extends Service {
   async bind(newData) {
     const result = await this.app.mysql.update('employee', newData);
     console.log(result);
-    return employee;
+    return result;
   }
 }
 

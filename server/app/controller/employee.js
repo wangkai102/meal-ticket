@@ -11,7 +11,7 @@ function resultObj({ code, data, msg }) {
 
 class EmployeeController extends Controller {
   async login() {
-    const { ctx } = this;
+    const { ctx, app } = this;
     const {
       request: { body },
       service,
@@ -30,7 +30,23 @@ class EmployeeController extends Controller {
 
     const employee = await service.employee.find({ openid: result.openid });
     if (employee) {
-      ctx.body = 'hi, egg';
+      const token = app.jwt.sign(
+        {
+          empId: employee.id,
+        },
+        app.config.jwt.secret
+      );
+      delete employee.openid;
+      ctx.body = JSON.stringify(
+        resultObj({
+          code: 0,
+          data: {
+            ...employee,
+            token,
+          },
+          msg: '未绑定员工账户',
+        })
+      );
     } else {
       ctx.body = JSON.stringify(
         resultObj({
@@ -45,7 +61,7 @@ class EmployeeController extends Controller {
   }
 
   async bind() {
-    const { ctx } = this;
+    const { ctx, app } = this;
     const {
       request: { body },
       service,
@@ -67,8 +83,19 @@ class EmployeeController extends Controller {
     if (empIdRes) {
       const result = await service.employee.bind({ ...empIdRes, openid });
       console.log(result);
+      const token = app.jwt.sign(
+        {
+          empId,
+        },
+        app.config.jwt.secret
+      );
+      delete empIdRes.openid;
       ctx.body = JSON.stringify({
         code: 0,
+        data: {
+          ...empIdRes,
+          token,
+        },
         msg: '绑定成功',
       });
     } else {

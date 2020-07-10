@@ -18,11 +18,11 @@ const Index = ({}) => {
   const [empId, setEmpId] = useState('');
   const home = useSelector((state) => state.home);
   const dispatch = useDispatch();
-  const { noBinding } = home;
+  const { noBinding, openid } = home;
 
   useEffect(() => {
     asyncActions.login(dispatch);
-  }, []);
+  }, [dispatch]);
 
   return (
     <View className={styles.index}>
@@ -41,7 +41,15 @@ const Index = ({}) => {
           </View>
         </AtModalContent>
         <AtModalAction>
-          <Button>确定</Button>
+          <Button
+            onClick={() => {
+              if (empId && openid) {
+                asyncActions.bind(dispatch, { empId, openid });
+              }
+            }}
+          >
+            确定
+          </Button>
         </AtModalAction>
       </AtModal>
       <Menu current={0} />

@@ -8,3 +8,12 @@ export const login = async (code) => {
     noToken: true,
   });
 };
+
+export const bind = async (data) => {
+  return await request({
+    method: 'POST',
+    url: `/wx/bind`,
+    data,
+    noToken: true,
+  });
+};

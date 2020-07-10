@@ -28,24 +28,21 @@ export const login = async (dispatch) => {
 };
 
 export const bind = async (dispatch, data) => {
-  const result = await homeService.login(data);
+  const result = await homeService.bind(data);
   console.log(result);
   if (result.code === 0) {
-    console.log(result.data);
+    await Taro.setStorage({ key: 'user', data: result.data });
+    dispatch({
+      type: 'save',
+      payload: {
+        noBinding: false,
+        user: result.data,
+      },
+    });
   } else {
-    if (result.data) {
-      dispatch({
-        type: 'save',
-        payload: {
-          noBinding: true,
-          ...result.data,
-        },
-      });
-    } else {
-      Taro.showModal({
-        title: '登录失败',
-        content: result.msg,
-      });
-    }
+    Taro.showModal({
+      title: '绑定失败',
+      content: result.msg,
+    });
   }
 };

@@ -33,7 +33,7 @@ module.exports = appInfo => {
       // 用户名
       user: 'root',
       // 密码
-      password: '',
+      password: 'root',
       // 数据库名
       database: 'meal_ticket',
     },
@@ -43,6 +43,9 @@ module.exports = appInfo => {
     agent: false,
   };
 
+  config.jwt = {
+    secret: '123456', // 自己设置的值
+  };
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',
