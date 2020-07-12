@@ -52,7 +52,7 @@ const Index = ({}) => {
           </Button>
         </AtModalAction>
       </AtModal>
-      <Menu current={0} />
+      <Menu current={1} />
     </View>
   );
 };
