@@ -17,3 +17,9 @@ export const bind = async (data) => {
     noToken: true,
   });
 };
+
+export const getCanteenList = async () => {
+  return await request({
+    url: `/getCanteenList`,
+  });
+};

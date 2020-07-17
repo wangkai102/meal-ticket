@@ -27,13 +27,13 @@ module.exports = appInfo => {
   config.mysql = {
     client: {
       // host
-      host: 'localhost',
+      host: '121.36.228.230',
       // 端口号
       port: '3306',
       // 用户名
       user: 'root',
       // 密码
-      password: 'root',
+      password: 'qhkj',
       // 数据库名
       database: 'meal_ticket',
     },

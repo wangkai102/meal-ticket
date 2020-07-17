@@ -4,6 +4,10 @@ const { Service } = require('egg');
 const axios = require('axios');
 
 class WeChatService extends Service {
+  async getIdAndSercet() {
+    const employee = await this.app.mysql.get('config', 'APP_ID');
+  }
+
   async login(code) {
     const miniApp = {
       id: 'wx068a1aabd1d8e02c',

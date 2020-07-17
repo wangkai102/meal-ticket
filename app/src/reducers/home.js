@@ -3,6 +3,7 @@ const INITIAL_STATE = {
   noBinding: false,
   openid: '',
   user: {},
+  canteenList: [],
 };
 
 export default function counter(state = INITIAL_STATE, action) {

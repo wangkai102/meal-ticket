@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Taro from '@tarojs/taro';
 import { View, Button } from '@tarojs/components';
 import {
   AtModal,
@@ -14,14 +15,26 @@ import styles from './index.module.less';
 
 import Menu from '../../components/Menu/index';
 
-const Index = ({}) => {
+const Index = () => {
   const [empId, setEmpId] = useState('');
   const home = useSelector((state) => state.home);
   const dispatch = useDispatch();
   const { noBinding, openid } = home;
-
   useEffect(() => {
-    asyncActions.login(dispatch);
+    const init = async () => {
+      try {
+        const userInfo = await Taro.getStorage({ key: 'user' });
+        dispatch({
+          type: 'save',
+          payload: {
+            user: userInfo.data,
+          },
+        });
+      } catch (error) {
+        asyncActions.login(dispatch);
+      }
+    };
+    init();
   }, [dispatch]);
 
   return (

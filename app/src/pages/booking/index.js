@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { View } from '@tarojs/components';
-import { AtForm, AtInput, AtButton } from 'taro-ui';
+import { View, Picker } from '@tarojs/components';
+import { AtForm, AtInput, AtButton, AtList, AtListItem } from 'taro-ui';
 import { useSelector, useDispatch } from 'react-redux';
 
 import * as asyncActions from '../../actions/home';
@@ -12,16 +12,30 @@ const Index = ({}) => {
   const home = useSelector((state) => state.home);
   const [formData, setFormData] = useState({});
   const dispatch = useDispatch();
-  // const {}
+  const { canteenList } = home;
 
   useEffect(() => {
-    // asyncActions.login(dispatch);
+    asyncActions.getCanteenList(dispatch);
   }, [dispatch]);
 
   return (
     <View className={styles.index}>
       <View className={styles.content}>
         <AtForm onSubmit={() => {}}>
+          <Picker
+            mode='selector'
+            range={['美国', '中国', '巴西', '日本']}
+            onChange={(e)=>{
+              console.log(e)
+            }}
+          >
+            <AtList>
+              <AtListItem
+                title='国家地区'
+                extraText='美国'
+              />
+            </AtList>
+          </Picker>
           <AtButton formType='submit'>提交</AtButton>
         </AtForm>
       </View>

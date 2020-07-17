@@ -8,7 +8,13 @@ export const login = async (dispatch) => {
   const result = await homeService.login(code);
   console.log(result);
   if (result.code === 0) {
-    console.log(result.data);
+    await Taro.setStorage({ key: 'user', data: result.data });
+    dispatch({
+      type: 'save',
+      payload: {
+        user: result.data,
+      },
+    });
   } else {
     if (result.data) {
       dispatch({
@@ -42,6 +48,24 @@ export const bind = async (dispatch, data) => {
   } else {
     Taro.showModal({
       title: '绑定失败',
+      content: result.msg,
+    });
+  }
+};
+
+export const getCanteenList = async (dispatch) => {
+  const result = await homeService.getCanteenList();
+  console.log(result);
+  if (result.code === 0) {
+    dispatch({
+      type: 'save',
+      payload: {
+        canteenList: result.data,
+      },
+    });
+  } else {
+    Taro.showModal({
+      title: '失败',
       content: result.msg,
     });
   }

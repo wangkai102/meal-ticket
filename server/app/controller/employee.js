@@ -44,7 +44,7 @@ class EmployeeController extends Controller {
             ...employee,
             token,
           },
-          msg: '未绑定员工账户',
+          msg: '',
         })
       );
     } else {
