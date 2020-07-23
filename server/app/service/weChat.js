@@ -5,15 +5,16 @@ const axios = require('axios');
 
 class WeChatService extends Service {
   async getIdAndSercet() {
-    const employee = await this.app.mysql.get('config', 'APP_ID');
+    const id = await this.app.mysql.get('config', 'APP_ID');
+    const secret = await this.app.mysql.get('config', 'APP_SECRET');
+    return {
+      id,
+      secret,
+    };
   }
 
   async login(code) {
-    const miniApp = {
-      id: 'wx068a1aabd1d8e02c',
-      secret: 'ea2423598da91493a43d9a01eade9637',
-    };
-
+    const miniApp = await this.getIdAndSercet();
     const result = await axios({
       url: `https://api.weixin.qq.com/sns/jscode2session?appid=${miniApp.id}&secret=${miniApp.secret}&js_code=${code}&grant_type=authorization_code`,
     });

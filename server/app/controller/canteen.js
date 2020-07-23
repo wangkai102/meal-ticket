@@ -10,7 +10,10 @@ function resultObj({ code, data, msg }) {
 }
 
 class CanteenController extends Controller {
-  async get() {}
+  async get() {
+    const {ctx} = this;
+    const result = ctx.
+  }
 }
 
 module.exports = CanteenController;
