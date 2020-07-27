@@ -9,6 +9,7 @@ export const login = async (dispatch) => {
   console.log(result);
   if (result.code === 0) {
     await Taro.setStorage({ key: 'user', data: result.data });
+    await Taro.setStorage({ key: 'token', data: result.data.token });
     dispatch({
       type: 'save',
       payload: {
@@ -38,6 +39,7 @@ export const bind = async (dispatch, data) => {
   console.log(result);
   if (result.code === 0) {
     await Taro.setStorage({ key: 'user', data: result.data });
+    await Taro.setStorage({ key: 'token', data: result.data.token });
     dispatch({
       type: 'save',
       payload: {

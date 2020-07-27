@@ -10,30 +10,42 @@ import Menu from '../../components/Menu/index';
 
 const Index = ({}) => {
   const home = useSelector((state) => state.home);
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    canteen: {
+      value: undefined,
+      text: '请选择',
+    },
+  });
   const dispatch = useDispatch();
   const { canteenList } = home;
-
+  console.log(canteenList);
   useEffect(() => {
     asyncActions.getCanteenList(dispatch);
   }, [dispatch]);
 
+  const { canteen } = formData;
   return (
     <View className={styles.index}>
       <View className={styles.content}>
         <AtForm onSubmit={() => {}}>
           <Picker
             mode='selector'
-            range={['美国', '中国', '巴西', '日本']}
-            onChange={(e)=>{
-              console.log(e)
+            range={canteenList}
+            rangeKey='name'
+            onChange={(e) => {
+              const { value } = e.detail;
+              setFormData({
+                ...formData,
+                canteen: {
+                  value,
+                  text: canteenList[value].name,
+                },
+              });
+              console.log(e);
             }}
           >
             <AtList>
-              <AtListItem
-                title='国家地区'
-                extraText='美国'
-              />
+              <AtListItem title='就餐食堂' extraText={canteen.text} />
             </AtList>
           </Picker>
           <AtButton formType='submit'>提交</AtButton>

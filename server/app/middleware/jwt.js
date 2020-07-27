@@ -8,7 +8,7 @@ module.exports = options => {
       try {
         decode = ctx.app.jwt.verify(token, options.secret);
         console.log(decode);
-        await next(decode);
+        await next();
       } catch (error) {
         ctx.status = 401;
         ctx.body = {

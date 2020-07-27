@@ -5,11 +5,11 @@ const axios = require('axios');
 
 class WeChatService extends Service {
   async getIdAndSercet() {
-    const id = await this.app.mysql.get('config', 'APP_ID');
-    const secret = await this.app.mysql.get('config', 'APP_SECRET');
+    const id = await this.app.mysql.get('config', { key: 'APP_ID' });
+    const secret = await this.app.mysql.get('config', { key: 'APP_SECRET' });
     return {
-      id,
-      secret,
+      id: id.value,
+      secret: secret.value,
     };
   }
 

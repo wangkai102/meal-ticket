@@ -20,6 +20,6 @@ export const bind = async (data) => {
 
 export const getCanteenList = async () => {
   return await request({
-    url: `/getCanteenList`,
+    url: `/canteen/getCanteenList`,
   });
 };

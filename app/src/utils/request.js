@@ -40,8 +40,9 @@ export default async function ({
     reqHeader = header;
   }
   if (!noToken) {
-    const token = await Taro.getStorage('userInfo').token;
-    reqHeader = { ...reqHeader, token };
+    const { data: token } = await Taro.getStorage({ key: 'token' });
+    console.log(token);
+    reqHeader = { ...reqHeader, authorization: token };
   }
   // 对请求的参数进行处理
   let requestParam = {

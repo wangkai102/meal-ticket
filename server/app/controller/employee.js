@@ -32,7 +32,7 @@ class EmployeeController extends Controller {
     if (employee) {
       const token = app.jwt.sign(
         {
-          empId: employee.id,
+          empId: employee.empId,
         },
         app.config.jwt.secret
       );

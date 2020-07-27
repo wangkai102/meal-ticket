@@ -4,7 +4,7 @@ const { Service } = require('egg');
 
 class EmployeeService extends Service {
   async find({ openid, empId }) {
-    const search = openid ? { openid } : { emp_id: empId };
+    const search = openid ? { openid } : { empId };
     const employee = await this.app.mysql.get('employee', search);
     return employee;
   }
