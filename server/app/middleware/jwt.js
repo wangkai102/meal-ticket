@@ -1,13 +1,13 @@
 'use strict';
 
-module.exports = options => {
+module.exports = (options) => {
   return async function jwt(ctx, next) {
     const token = ctx.request.header.authorization;
     let decode;
     if (token) {
       try {
         decode = ctx.app.jwt.verify(token, options.secret);
-        console.log(decode);
+        ctx.state.empId = decode.empId;
         await next();
       } catch (error) {
         ctx.status = 401;

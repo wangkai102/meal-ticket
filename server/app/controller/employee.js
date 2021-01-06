@@ -1,13 +1,6 @@
 'use strict';
 const Controller = require('egg').Controller;
-
-function resultObj({ code, data, msg }) {
-  return {
-    code,
-    data,
-    msg,
-  };
-}
+const { resultObj } = require('../utils/utils');
 
 class EmployeeController extends Controller {
   async login() {

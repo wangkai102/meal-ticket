@@ -33,7 +33,7 @@ module.exports = appInfo => {
       // 用户名
       user: 'root',
       // 密码
-      password: 'qhkj',
+      password: 'root123',
       // 数据库名
       database: 'meal_ticket',
     },

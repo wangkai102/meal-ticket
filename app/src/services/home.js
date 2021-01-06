@@ -23,3 +23,12 @@ export const getCanteenList = async () => {
     url: `/canteen/getCanteenList`,
   });
 };
+
+export const submitOrder = async (data) => {
+  console.log(data);
+  return await request({
+    url: `/order/submit`,
+    method: 'POST',
+    data,
+  });
+};

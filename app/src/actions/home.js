@@ -72,3 +72,21 @@ export const getCanteenList = async (dispatch) => {
     });
   }
 };
+
+export const submitOrder = async (dispatch, data) => {
+  const result = await homeService.submitOrder(data);
+  console.log(result);
+  // if (result.code === 0) {
+  //   dispatch({
+  //     type: 'save',
+  //     payload: {
+  //       canteenList: result.data,
+  //     },
+  //   });
+  // } else {
+  //   Taro.showModal({
+  //     title: '失败',
+  //     content: result.msg,
+  //   });
+  // }
+};
