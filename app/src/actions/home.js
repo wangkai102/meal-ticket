@@ -16,6 +16,7 @@ export const login = async (dispatch) => {
         user: result.data,
       },
     });
+    await asyncActions.getOrderList(dispatch);
   } else {
     if (result.data) {
       dispatch({
@@ -36,7 +37,6 @@ export const login = async (dispatch) => {
 
 export const bind = async (dispatch, data) => {
   const result = await homeService.bind(data);
-  console.log(result);
   if (result.code === 0) {
     await Taro.setStorage({ key: 'user', data: result.data });
     await Taro.setStorage({ key: 'token', data: result.data.token });
@@ -47,6 +47,7 @@ export const bind = async (dispatch, data) => {
         user: result.data,
       },
     });
+    await asyncActions.getOrderList(dispatch);
   } else {
     Taro.showModal({
       title: '绑定失败',
@@ -93,5 +94,17 @@ export const submitOrder = async (dispatch, data) => {
 
 export const getOrderList = async (dispatch) => {
   const result = await homeService.getOrderList();
-  console.log(result);
+  if (result.code === 0) {
+    dispatch({
+      type: 'save',
+      payload: {
+        orderList: result.data,
+      },
+    });
+  } else {
+    Taro.showModal({
+      title: '获取订单列表失败',
+      content: result.msg,
+    });
+  }
 };

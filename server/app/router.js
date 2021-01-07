@@ -14,5 +14,5 @@ module.exports = (app) => {
   router.get(`${PREFIX}/canteen/getCanteenList`, jwt, controller.canteen.get);
 
   router.post(`${PREFIX}/order/submit`, jwt, controller.orderList.submit);
-  router.post(`${PREFIX}/order/get`, jwt, controller.orderList.get);
+  router.get(`${PREFIX}/order/get`, jwt, controller.orderList.get);
 };

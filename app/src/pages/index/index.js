@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Taro from '@tarojs/taro';
-import { View, Button } from '@tarojs/components';
+import { View, Button, ScrollView } from '@tarojs/components';
 import {
   AtModal,
   AtModalHeader,
   AtModalContent,
   AtModalAction,
   AtInput,
+  AtIcon,
 } from 'taro-ui';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -40,6 +41,21 @@ const Index = () => {
 
   return (
     <View className={styles.index}>
+      <View className={styles.orderWrap}>
+        <ScrollView scrollY scrollWithAnimation className={styles.orderList}>
+          <View className={styles.item}>
+            <View className={styles.info}>
+              <View className={styles.date}>今日午餐</View>
+              <View className={styles.status}>未就餐</View>
+            </View>
+            <View className={styles.canteen}>
+              <AtIcon value="home" />
+              就餐食堂: 东三食堂
+            </View>
+          </View>
+        </ScrollView>
+      </View>
+
       <AtModal isOpened={noBinding} closeOnClickOverlay={false}>
         <AtModalHeader>工号绑定</AtModalHeader>
         <AtModalContent>

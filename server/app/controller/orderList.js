@@ -12,7 +12,6 @@ class OrderList extends Controller {
       state: { empId },
     } = ctx;
     const { canteenId, canteenName, eatTime, eatDate } = body;
-    // console.log(empId);
     const result = await service.orderList.insertOrder({
       employee_id: empId,
       canteen_id: canteenId,
@@ -40,7 +39,7 @@ class OrderList extends Controller {
       state: { empId },
     } = ctx;
 
-    const result = await this.service.orderList.getEmployeeList(empId);
+    const result = await this.service.orderList.getEmployeeOrder(empId);
     ctx.body = resultObj({
       code: 0,
       data: result,

@@ -4,6 +4,7 @@ const INITIAL_STATE = {
   openid: '',
   user: {},
   canteenList: [],
+  orderList: [],
 };
 
 export default function counter(state = INITIAL_STATE, action) {
