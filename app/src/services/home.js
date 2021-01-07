@@ -32,3 +32,9 @@ export const submitOrder = async (data) => {
     data,
   });
 };
+
+export const getOrderList = async () => {
+  return await request({
+    url: `/order/get`,
+  });
+};

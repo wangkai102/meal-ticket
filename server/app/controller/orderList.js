@@ -33,6 +33,20 @@ class OrderList extends Controller {
       );
     }
   }
+
+  async get() {
+    const { ctx, app } = this;
+    const {
+      state: { empId },
+    } = ctx;
+
+    const result = await this.service.orderList.getEmployeeList(empId);
+    ctx.body = resultObj({
+      code: 0,
+      data: result,
+      msg: '',
+    });
+  }
 }
 
 module.exports = OrderList;

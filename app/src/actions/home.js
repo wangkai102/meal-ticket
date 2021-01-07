@@ -90,3 +90,8 @@ export const submitOrder = async (dispatch, data) => {
   //   });
   // }
 };
+
+export const getOrderList = async (dispatch) => {
+  const result = await homeService.getOrderList();
+  console.log(result);
+};

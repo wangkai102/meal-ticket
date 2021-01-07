@@ -30,8 +30,9 @@ const Index = () => {
             user: userInfo.data,
           },
         });
+        await asyncActions.getOrderList(dispatch);
       } catch (error) {
-        asyncActions.login(dispatch);
+        await asyncActions.login(dispatch);
       }
     };
     init();
@@ -44,8 +45,8 @@ const Index = () => {
         <AtModalContent>
           <View>
             <AtInput
-              type='text'
-              placeholder='请输入您的员工号码以绑定信息'
+              type="text"
+              placeholder="请输入您的员工号码以绑定信息"
               value={empId}
               onChange={(v) => {
                 setEmpId(v);
